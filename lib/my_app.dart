@@ -11,14 +11,18 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      navigatorKey: navigatorKey, // أضف هذا السطر
+      navigatorKey: navigatorKey,
       builder: (context, child) {
         return BlocListener<ConnectionCubit, AppConnectionState>(
           listener: (context, state) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
-              if (state.status == ConnectionStatus.disconnected) {
+              // لا نعرض أي شيء إذا كانت هذه هي الحالة الأولية
+              if (state.isFirstStatusCheck) return;
+
+              if (state.currentStatus == ConnectionStatus.disconnected) {
                 showConnectionFlushbar("لا يوجد اتصال بالإنترنت", Colors.red);
-              } else {
+              } else if (state.previousStatus ==
+                  ConnectionStatus.disconnected) {
                 showConnectionFlushbar("تم استعادة الاتصال", Colors.green);
               }
             });

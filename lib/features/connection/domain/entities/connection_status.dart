@@ -1,2 +1,1 @@
-
 enum ConnectionStatus { connected, disconnected }
