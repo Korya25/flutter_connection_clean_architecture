@@ -15,17 +15,13 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return BlocListener<ConnectionCubit, AppConnectionState>(
           listener: (context, state) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              // لا نعرض أي شيء إذا كانت هذه هي الحالة الأولية
-              if (state.isFirstStatusCheck) return;
+            if (state.isFirstStatusCheck) return;
 
-              if (state.currentStatus == ConnectionStatus.disconnected) {
-                showConnectionFlushbar("لا يوجد اتصال بالإنترنت", Colors.red);
-              } else if (state.previousStatus ==
-                  ConnectionStatus.disconnected) {
-                showConnectionFlushbar("تم استعادة الاتصال", Colors.green);
-              }
-            });
+            if (state.currentStatus == ConnectionStatus.disconnected) {
+              ConnectionNotifier.showDisconnected();
+            } else if (state.previousStatus == ConnectionStatus.disconnected) {
+              ConnectionNotifier.showConnected();
+            }
           },
           child: child!,
         );
