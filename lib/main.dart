@@ -6,6 +6,8 @@ import 'package:flutter_connection_clean_architecture/my_app.dart';
 import 'features/connection/data/repositories/connection_repository_impl.dart';
 import 'features/connection/domain/usecases/check_connection_usecase.dart';
 
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
 void main() {
   final connectivity = Connectivity();
   final connectionRepo = ConnectionRepositoryImpl(connectivity);
