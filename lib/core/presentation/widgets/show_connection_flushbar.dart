@@ -1,20 +1,33 @@
 import 'package:another_flushbar/flushbar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_connection_clean_architecture/main.dart';
 
 class ConnectionNotifier {
-  static const Duration _animationDuration = Duration(milliseconds: 150);
+  // إعدادات متغيرة حسب المنصة
+  static Duration get _animationDuration {
+    return kIsWeb ? Duration(milliseconds: 200) : Duration(milliseconds: 350);
+  }
+
+  static EdgeInsets get _margin {
+    return kIsWeb
+        ? EdgeInsets.symmetric(horizontal: 24, vertical: 12)
+        : EdgeInsets.symmetric(horizontal: 12, vertical: 8);
+  }
+
+  static EdgeInsets get _padding {
+    return kIsWeb
+        ? EdgeInsets.symmetric(horizontal: 24, vertical: 20)
+        : EdgeInsets.symmetric(horizontal: 20, vertical: 16);
+  }
+
+  static double get _iconSize {
+    return kIsWeb ? 28.0 : 24.0;
+  }
+
+  // إعدادات ثابتة مشتركة
   static const Curve _enterCurve = Curves.fastOutSlowIn;
   static const Curve _exitCurve = Curves.easeIn;
-
-  static const EdgeInsets _margin = EdgeInsets.symmetric(
-    horizontal: 12,
-    vertical: 8,
-  );
-  static const EdgeInsets _padding = EdgeInsets.symmetric(
-    horizontal: 20,
-    vertical: 16,
-  );
   static const BorderRadius _borderRadius = BorderRadius.all(
     Radius.circular(12),
   );
@@ -44,10 +57,23 @@ class ConnectionNotifier {
     final context = navigatorKey.currentContext;
     if (context == null) return;
 
+    // تحديد الموضع حسب المنصة
+    final position = kIsWeb ? FlushbarPosition.BOTTOM : FlushbarPosition.TOP;
+
     Flushbar(
-      messageText: Text(message, style: _textStyle),
-      icon: icon != null ? Icon(icon, size: 24.0, color: Colors.white) : null,
-      backgroundColor: color.withAlpha(200),
+      messageText: Text(
+        message,
+        style: _textStyle.copyWith(fontSize: kIsWeb ? 16.0 : 15.0),
+      ),
+      icon:
+          icon != null
+              ? Icon(
+                icon,
+                size: _iconSize,
+                color: Colors.white.withOpacity(0.9),
+              )
+              : null,
+      backgroundColor: color.withOpacity(kIsWeb ? 0.9 : 0.95),
       duration: duration,
       borderRadius: _borderRadius,
       margin: _margin,
@@ -56,12 +82,13 @@ class ConnectionNotifier {
       animationDuration: _animationDuration,
       forwardAnimationCurve: _enterCurve,
       reverseAnimationCurve: _exitCurve,
-      flushbarPosition: FlushbarPosition.TOP,
+      flushbarPosition: position,
       flushbarStyle: FlushbarStyle.FLOATING,
       isDismissible: isDismissible,
       shouldIconPulse: false,
-      barBlur: 4.0,
-      routeBlur: 0.5,
+      barBlur: kIsWeb ? 2.0 : 4.0,
+      routeBlur: kIsWeb ? 0.2 : 0.5,
+      maxWidth: kIsWeb ? 400.0 : double.infinity,
     ).show(context);
   }
 
@@ -70,7 +97,7 @@ class ConnectionNotifier {
       message: 'Internet connection restored',
       color: Colors.green.shade700,
       icon: Icons.wifi_rounded,
-      duration: const Duration(seconds: 2),
+      duration: const Duration(seconds: kIsWeb ? 3 : 2),
     );
   }
 
@@ -79,8 +106,7 @@ class ConnectionNotifier {
       message: 'No internet connection',
       color: Colors.red.shade700,
       icon: Icons.wifi_off_rounded,
-      duration: const Duration(seconds: 4),
-      isDismissible: false,
+      duration: const Duration(seconds: kIsWeb ? 5 : 4),
     );
   }
 }
