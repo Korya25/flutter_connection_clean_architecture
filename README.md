@@ -1,25 +1,21 @@
-# Asroo Store - Flutter E-Commerce App
+Flutter Connection Monitor 🌐📶
 
-![Asroo Store Banner](assets/images/app_banner.png)
+A robust Flutter package for monitoring internet connection status with clean architecture, supporting both mobile and web platforms with advanced features.
 
-A complete Flutter e-commerce application with modern UI, real-time connectivity monitoring, and Firebase integration.
+Features ✨
 
-## Features
+🕵️‍♂️ Real-time connection monitoring
 
-- **Real Internet Connectivity Check**: Not just network detection but actual internet access verification
-- **Modern UI**: Clean and responsive design
-- **Firebase Integration**: Ready for backend implementation
-- **Environment Management**: Dev/Prod environment switching
-- **Network-Aware Components**: Automatic handling of offline/online states
+📱 Multi-platform support (iOS, Android, Web)
 
-## Installation
+🏗 Clean Architecture implementation
 
-1. **Prerequisites**
-   - Flutter SDK (latest stable version)
-   - Firebase account (for backend services)
-   - Android Studio/VSCode with Flutter plugins
+🧩 BLoC state management
 
-2. **Setup**
-   ```bash
-   flutter pub get
-   flutter packages pub run build_runner build
+📶 Network type awareness (WiFi, mobile, Ethernet)
+
+🔔 Customizable notifications
+
+
+
+
