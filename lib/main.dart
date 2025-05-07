@@ -8,7 +8,6 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await setupDependencyInjection();
   runApp(
     BlocProvider(create: (_) => sl<ConnectionCubit>(), child: const MyApp()),

@@ -1,6 +1,5 @@
-
-import '../repositories/connection_repository.dart';
-import '../entities/connection_status.dart';
+import 'package:flutter_connection_clean_architecture/features/connection/domain/entities/connection_status.dart';
+import 'package:flutter_connection_clean_architecture/features/connection/domain/repositories/connection_repository.dart';
 
 class CheckConnectionUseCase {
   final ConnectionRepository repository;
