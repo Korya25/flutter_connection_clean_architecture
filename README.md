@@ -16,6 +16,9 @@ Features ✨
 
 🔔 Customizable notifications
 
+## 📸 Screenshots  
+
+![deviceframes](https://github.com/user-attachments/assets/bfe5c3ea-5bc9-4235-8f4b-e79d932675c9)
 
 
 
